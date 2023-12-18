@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"html/template"
@@ -12,18 +12,27 @@ import (
 
 func main() {
 	r := chi.NewRouter()
+
+	log.Println("Started")
 	r.Use(middleware.Logger)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		tmpl, err := template.ParseFiles("view/index.html", "view/base.html")
+		if err != nil {
+			log.Fatal(err)
+		}
+		tmpl.ExecuteTemplate(w, "base", "data")
+	})
 	r.Get("/about", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.ParseFiles("view/about.html", "view/base.html")
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 		tmpl.ExecuteTemplate(w, "base", "data")
 	})
 	r.Get("/second-about", func(w http.ResponseWriter, r *http.Request) {
 		tmpl, err := template.ParseFiles("view/second-about.html", "view/base.html")
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 		tmpl.ExecuteTemplate(w, "base", "data")
 	})
