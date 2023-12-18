@@ -1,0 +1,15 @@
+{{define "base"}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>HTMX testing page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+  </head>
+  <body hx-boost="true">
+    <h1>HTMX testing page</h1>
+    {{ template "content" . }}
+  </body>
+</html>
+{{end}}
